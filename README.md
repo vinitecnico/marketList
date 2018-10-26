@@ -6,6 +6,9 @@ ASP.NET Core is an open-source and cross-platform framework for building modern 
 ASP.NET Core 2.1 is now available! See the [release notes](https://github.com/aspnet/AspNetCore/releases/tag/2.1.0) for further details and check our [releases](https://github.com/aspnet/AspNetCore/releases/) for the latest patch release.
 
 # marketList run
+
 dotnet build
+
 dotnet run
+
 http://localhost:7001/swagger/index.html
