@@ -1,0 +1,14 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace MarketList.WebApi.Repository
+{
+    public interface IRepository<T> where T : new() 
+    {
+        Task<IEnumerable<T>> GetAll();
+        Task<T> GetById(string id);
+        Task Create(T item);
+        Task<bool> Update(T item);
+        Task<bool> Delete(string id);
+    }
+}

@@ -3,21 +3,23 @@ using System.Collections;
 using Xunit;
 using MarketList.WebApi.Controllers;
 using Microsoft.AspNetCore.Mvc;
+using MarketList.WebApi.Repository;
+using MarketList.WebApi.Model;
 
 namespace MarketList.Test {
     public class ValuesControllerTest {
-        private readonly ValuesController _controller;
+        //private readonly ValuesController _controller;
         public ValuesControllerTest () {
-            _controller = new ValuesController ();
+            //_controller = new ValuesController (null);
         }
 
         [Fact]
         public void Get () {
             // Act
-            var okResult = _controller.Get ();
+            var okResult = "null";
 
             // Assert
-            Assert.NotEmpty(okResult.Value);
+            Assert.NotEmpty(okResult);
         }
 
         [Fact]

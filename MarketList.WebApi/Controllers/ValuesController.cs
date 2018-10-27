@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MarketList.WebApi.Model;
+using MarketList.WebApi.Repository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MarketList.WebApi.Controllers
@@ -10,11 +12,19 @@ namespace MarketList.WebApi.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private readonly IRepository<Model.Supermarket> _supermarketRepository;
+
+        public ValuesController(IRepository<Model.Supermarket> supermarketRepository)
+        {
+            _supermarketRepository = supermarketRepository;
+        }
+
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public async Task<ActionResult<IEnumerable<Supermarket>>> Get()
         {
-            return new string[] { "value1", "value2" };
+            var result = await _supermarketRepository.GetAll();
+            return result.ToList();
         }
 
         // GET api/values/5
