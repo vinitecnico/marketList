@@ -8,7 +8,7 @@ namespace MarketList.WebApi.Repository
         Task<IEnumerable<T>> GetAll();
         Task<T> GetById(string id);
         Task Create(T item);
-        Task<bool> Update(T item);
+        Task Update(string id, T item);
         Task<bool> Delete(string id);
     }
 }

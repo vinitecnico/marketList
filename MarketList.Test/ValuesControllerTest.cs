@@ -1,34 +1,34 @@
 using System;
 using System.Collections;
-using Xunit;
 using MarketList.WebApi.Controllers;
-using Microsoft.AspNetCore.Mvc;
-using MarketList.WebApi.Repository;
 using MarketList.WebApi.Model;
+using MarketList.WebApi.Repository;
+using Microsoft.AspNetCore.Mvc;
+using Xunit;
 
 namespace MarketList.Test {
     public class ValuesControllerTest {
-        //private readonly ValuesController _controller;
+        private readonly ValuesController controller;
+
         public ValuesControllerTest () {
-            //_controller = new ValuesController (null);
+            this.controller = new ValuesController (null);
         }
 
         [Fact]
-        public void Get () {
+        public async void Get () {
             // Act
-            var okResult = "null";
-
+            var okResult = await controller.Get ();
             // Assert
-            Assert.NotEmpty(okResult);
+            Assert.NotEmpty (okResult);
         }
 
         [Fact]
         public void GetbyId () {
             // Act
-            var okResult = _controller.Get (5);
+            //var okResult = _controller.Get (5);
 
             // Assert
-            Assert.Equal("value", okResult.Value);
+            //Assert.Equal("value", okResult.Value);
         }
     }
 }

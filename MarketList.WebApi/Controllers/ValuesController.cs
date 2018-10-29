@@ -21,7 +21,7 @@ namespace MarketList.WebApi.Controllers
 
         // GET api/values
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Supermarket>>> Get()
+        public async Task<IEnumerable<Supermarket>> Get()
         {
             var result = await _supermarketRepository.GetAll();
             return result.ToList();
@@ -37,20 +37,23 @@ namespace MarketList.WebApi.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task Post([FromBody] Supermarket item)
         {
+            await _supermarketRepository.Create(item);
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task Put(string id, [FromBody] Supermarket item)
         {
+            await _supermarketRepository.Update(id, item);
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<bool> Delete(string id)
         {
+            return await _supermarketRepository.Delete(id);
         }
     }
 }
