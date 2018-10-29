@@ -15,14 +15,15 @@ namespace MarketList.WebApi.Repository
             _context = context;
         }
 
-        public Task Create(Supermarket item)
+        public async Task Create(Supermarket item)
         {
-            throw new System.NotImplementedException();
+            await _context.collection.InsertOneAsync(item);
         }
 
-        public Task<bool> Delete(string id)
+        public async Task<bool> Delete(string id)
         {
-            throw new System.NotImplementedException();
+            var result = await _context.collection.FindOneAndDeleteAsync(x => x.Id.ToString() == id);
+            return true;
         }
 
         public async Task<IEnumerable<Supermarket>> GetAll()
@@ -30,14 +31,18 @@ namespace MarketList.WebApi.Repository
             return await _context.collection.Find(_ => true).ToListAsync();
         }
 
-        public Task<Supermarket> GetById(string id)
+        public async Task<Supermarket> GetById(string id)
         {
-            throw new System.NotImplementedException();
+            return await _context.collection.Find(x => x.Id.ToString() == id).FirstAsync();
         }
 
-        public Task<bool> Update(Supermarket item)
+        public async Task<bool> Update(Supermarket item)
         {
-            throw new System.NotImplementedException();
+            var filter2 = Builders<Supermarket>.Filter.Eq("_id", item.Id);
+            var update2 = Builders<Supermarket>.Update.Inc(c => c.ProductName, item.ProductName);
+            var options2 = new FindOneAndUpdateOptions<Supermarket> { IsUpsert = true, ReturnDocument = ReturnDocument.After};
+            var result2 = await _context.collection.FindOneAndUpdateAsync(filter2, update2, options2);
+            return true;
         }
     }
 }
