@@ -29,9 +29,10 @@ namespace MarketList.WebApi.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public async Task<ActionResult<Supermarket>> Get(string id)
         {
-            return "value";
+            var result = await _supermarketRepository.GetById(id);
+            return result;
         }
 
         // POST api/values

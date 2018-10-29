@@ -33,12 +33,12 @@ namespace MarketList.WebApi.Repository
 
         public async Task<Supermarket> GetById(string id)
         {
-            return await _context.collection.Find(x => x.Id.ToString() == id).FirstAsync();
+            return await _context.collection.Find(x => x.Id == ObjectId.Parse(id)).FirstOrDefaultAsync();
         }
 
         public async Task<bool> Update(Supermarket item)
         {
-            var filter2 = Builders<Supermarket>.Filter.Eq("_id", item.Id);
+            var filter2 = Builders<Supermarket>.Filter.Eq("Id", item.Id);
             var update2 = Builders<Supermarket>.Update.Inc(c => c.ProductName, item.ProductName);
             var options2 = new FindOneAndUpdateOptions<Supermarket> { IsUpsert = true, ReturnDocument = ReturnDocument.After};
             var result2 = await _context.collection.FindOneAndUpdateAsync(filter2, update2, options2);
